@@ -1,0 +1,14 @@
+<?xml version = '1.0'?>
+<!DOCTYPE connections>
+<connections>
+   <connection>
+      <JDBC_PORT>1521</JDBC_PORT>
+      <ConnectionType>JDBC</ConnectionType>
+      <HOSTNAME>gorepro.genesys.com</HOSTNAME>
+      <user>gore</user>
+      <ConnectionName>GOREPRO</ConnectionName>
+      <SID>GOREPRO</SID>
+      <JdbcDriver>oracle.jdbc.driver.OracleDriver</JdbcDriver>
+      <ORACLE_JDBC_TYPE>thin</ORACLE_JDBC_TYPE>
+   </connection>
+</connections>
