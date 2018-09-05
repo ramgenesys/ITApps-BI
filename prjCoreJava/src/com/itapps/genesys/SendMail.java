@@ -26,7 +26,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-
 public class SendMail {
 	
 	 private static String GetMailAttribute(String Attrib, File xmlFile)
@@ -173,44 +172,15 @@ public class SendMail {
 
          // Set From: header field of the header.
          message.setFrom(new InternetAddress(From));
-
-         // Set To: header field of the header.
-         mailList = To.split(",");
-         recipientAddress = new InternetAddress[mailList.length];
-         for (int i=0; i<mailList.length; i++)
-         {
-        	 System.out.println("Adding email - " + mailList[i]);
-        	 try{
-        		 recipientAddress[i] = new InternetAddress(mailList[i],false);
-        	 }
-        	 catch(Exception _e)
-        	 {
-        		 _e.printStackTrace();
-        	 }
-        	 
-         }
          message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(To, true));
-         //message.setRecipients(Message.RecipientType.TO, recipientAddress);
          if (!CC.equals(""))
          {
-        	 mailList = CC.split(",");
-        	 recipientAddress = new InternetAddress[mailList.length];
-             for (int i=0; i<mailList.length; i++)
-             {
-            	 System.out.println("Adding email - " + mailList[i]);
-            	 recipientAddress[i] = new InternetAddress(mailList[i]);
-             }
-        	 message.setRecipients(Message.RecipientType.CC, recipientAddress);
+             message.setRecipients(Message.RecipientType.CC, InternetAddress.parse(CC, true));
          }
          if (!BCC.equals(""))
          {
-        	 mailList = BCC.split(",");
-        	 recipientAddress = new InternetAddress[mailList.length];
-             for (int i=0; i<mailList.length; i++)
-             {
-            	 recipientAddress[i] = new InternetAddress(mailList[i]);
-             }
-        	 message.setRecipients(Message.RecipientType.BCC, recipientAddress);
+             message.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(CC, true));
+        	 //message.setRecipients(Message.RecipientType.BCC, recipientAddress);
          }
          // Set Subject: header field
          message.setSubject(Subject);
@@ -219,8 +189,8 @@ public class SendMail {
          BodyPart messageBodyPart = new MimeBodyPart();
 
          // Now set the actual message
-         messageBodyPart.setText(Body);
-
+         //messageBodyPart.setText(Body);
+         messageBodyPart.setContent(Body, "text/html; charset=utf-8");
          // Create a multipart message
          Multipart multipart = new MimeMultipart();
 
@@ -239,6 +209,7 @@ public class SendMail {
 
          // Send the complete message parts
          message.setContent(multipart, "text/html; charset=utf-8");
+         //message.setContent(html, "text/html; charset=utf-8");
 
          // Send message
          Transport.send(message);

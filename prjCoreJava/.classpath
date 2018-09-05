@@ -3,6 +3,6 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.6"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/App/oracle/commdb/11.2.0/ojdbc6.jar"/>
-	<classpathentry kind="lib" path="C:/App/eclipse/workspace/prjCoreJava/bin/temp/mail.jar"/>
+	<classpathentry kind="lib" path="C:/gorantla/genesys/gore/javamail/mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
