@@ -40,13 +40,14 @@ public class SendMail {
 			 NodeList nList = doc.getElementsByTagName("Mail");
 			 Node nNode = nList.item(0);
 			 Element eElement = (Element) nNode;
-			 return eElement.getElementsByTagName(Attrib).item(0).getTextContent(); 	
+			 //return eElement.getElementsByTagName(Attrib).item(0).getTextContent(); 	
+			 return eElement.getElementsByTagName(Attrib).item(0).getTextContent(); 
 			}
 		catch(Exception _e)
 		{
-			System.out.println("Ignore this error.");
-			 _e.printStackTrace();
-			 System.out.println("It is just a note.");
+			//System.out.println("Ignore this error.");
+			 //_e.printStackTrace();
+			 System.out.println("It is just a note. " + Attrib + " element does not in the context xml." );
 			 return "";
 		}	 
 	 }
@@ -107,6 +108,9 @@ public class SendMail {
       String Body = GetMailAttribute("Body", x);
       String Attachment = GetMailAttribute("Attachment", x);
       String[] mailList;
+      
+      //System.out.println(Body);
+      
       InternetAddress[] recipientAddress;
       //String Mimetype = GetMailAttribute("Mimetype", x);
 
@@ -190,7 +194,7 @@ public class SendMail {
 
          // Now set the actual message
          //messageBodyPart.setText(Body);
-         messageBodyPart.setContent(Body, "text/html; charset=utf-8");
+         messageBodyPart.setContent(Body, "text/html");
          // Create a multipart message
          Multipart multipart = new MimeMultipart();
 
@@ -202,13 +206,14 @@ public class SendMail {
 	         messageBodyPart = new MimeBodyPart();
 	         String filename = Attachment;
 	         DataSource source = new FileDataSource(filename);
+	         messageBodyPart.addHeader("content-type", "html/text");//set to html format
 	         messageBodyPart.setDataHandler(new DataHandler(source));
 	         messageBodyPart.setFileName(Attachment.substring(Attachment.lastIndexOf("\\")+1));
 	         multipart.addBodyPart(messageBodyPart);
          }
 
          // Send the complete message parts
-         message.setContent(multipart, "text/html; charset=utf-8");
+         message.setContent(multipart, "text/html");
          //message.setContent(html, "text/html; charset=utf-8");
 
          // Send message

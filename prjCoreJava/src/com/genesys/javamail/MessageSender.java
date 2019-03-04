@@ -36,6 +36,7 @@ public class MessageSender
   Transport transport;
   boolean isDebugRecipient;
   
+  
   public MessageSender()
     throws Exception, MessagingException, NoSuchProviderException, SQLException
   {

@@ -22,6 +22,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.Transport;
 
 public class OracleMimeMessage
 {
@@ -60,6 +61,7 @@ public class OracleMimeMessage
     bodySubContentType = null;
     isMultipart = false;
   }
+  
   
   protected static void clear()
   {
@@ -392,6 +394,7 @@ public class OracleMimeMessage
       if (message != null) {
         message.writeTo(new CRLFOutputStream(System.out));
       }
+      Transport.send(message);
     }
     catch (Exception localException)
     {
@@ -468,9 +471,12 @@ public class OracleMimeMessage
     localMimeMessage.saveChanges();
     
     savetoDB(localMimeMessage);
+    //message = localMimeMessage;
+    
     if ((paramInt != 1) && (paramString12 != null) && (paramString12.length() > 0)) {
       new File(paramString12).delete();
     }
+    
   }
   
   public static void sendAtOnce(String paramString1, String paramString2, String paramString3, String paramString4, String paramString5, String paramString6, String paramString7, String paramString8, String paramString9, String paramString10)
